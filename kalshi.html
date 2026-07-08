@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalshi — Justin Park</title>
+<meta name="description" content="Justin Park's growth, content, and design work for Kalshi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0C1210;--panel:#111A16;--ink:#EDF3EF;--muted:#8CA096;
+  --line:#22302A;--up:#00D08C;--up-dim:rgba(0,208,140,.14);--maxw:1000px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Archivo',system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+::selection{background:var(--up);color:#06120D}
+a{color:inherit}
+img,video{display:block;max-width:100%}
+
+/* nav */
+nav.main-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:rgba(12,18,16,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-mark{font-weight:900;font-stretch:125%;letter-spacing:-.02em;font-size:18px;text-decoration:none;text-transform:uppercase}
+.back{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .15s}
+.back:hover{color:var(--up)}
+
+/* sticky section nav */
+.sec-nav{position:sticky;top:49px;z-index:40;background:rgba(12,18,16,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.sec-nav::-webkit-scrollbar{display:none}
+.sec-nav-inner{display:inline-flex;padding:0 24px}
+.sec-nav a{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:12px 16px;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap}
+.sec-nav a:hover{color:var(--ink)}
+.sec-nav a.active{color:var(--up);border-bottom-color:var(--up)}
+
+/* hero */
+header{padding:150px 24px 0;max-width:var(--maxw);margin:0 auto}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--up);display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--up);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1 .L{display:inline-block;font-stretch:105%;will-change:font-stretch}
+@media (hover:none),(prefers-reduced-motion:reduce){h1 .L{font-stretch:125%}}
+h1{font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(56px,13vw,150px);line-height:.9;letter-spacing:-.025em}
+h1 .up{color:var(--up)}
+.sub{margin-top:24px;max-width:600px;font-size:18px;font-weight:500}
+.role-row{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 11px;border-radius:999px;background:var(--up-dim);color:var(--up)}
+.hero-load .eyebrow,.hero-load h1,.hero-load .sub,.hero-load .role-row{opacity:0;transform:translateY(18px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+.hero-load h1{animation-delay:.12s}.hero-load .sub{animation-delay:.24s}.hero-load .role-row{animation-delay:.34s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ticker */
+.tape{margin-top:52px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;background:var(--panel)}
+.tape-inner{display:inline-block;padding:10px 0;animation:tick 38s linear infinite}
+.tape span{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.04em;margin:0 28px;text-transform:uppercase;color:var(--muted)}
+.tape b{color:var(--up);font-weight:600}
+.tape span.flash{color:var(--up);transition:color .2s}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* sparkline */
+.spark-wrap{max-width:var(--maxw);margin:40px auto 0;padding:0 24px}
+.spark-box{border:1px solid var(--line);background:var(--panel);padding:14px 16px 10px}
+.spark-head{display:flex;justify-content:space-between;align-items:baseline;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.spark-head .q{color:var(--up);font-weight:600;font-size:13px}
+.spark-head .q .pct{display:inline-block;min-width:3.2ch;text-align:right}
+#spark{display:block;width:100%;height:70px;margin-top:6px}
+#spark path{fill:none;stroke:var(--up);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+#spark .fill{fill:url(#sparkfade);stroke:none}
+.spark-dot{fill:var(--up)}
+
+/* sections */
+section{max-width:var(--maxw);margin:0 auto;padding:90px 24px 0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:14px;gap:16px;flex-wrap:wrap}
+.sec-head h2{font-weight:900;font-stretch:118%;text-transform:uppercase;font-size:clamp(28px,5vw,48px);letter-spacing:-.015em}
+.sec-head .q{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--up);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.sec-desc{color:var(--muted);font-size:16.5px;max-width:62ch;margin-bottom:26px}
+.sec-links{display:flex;gap:12px;margin-bottom:26px;flex-wrap:wrap}
+.sec-links a{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:7px 13px;color:var(--ink);transition:border-color .15s,color .15s,background .15s}
+.sec-links a:hover{border-color:var(--up);color:var(--up);background:var(--up-dim)}
+
+/* sub-sections within a section */
+.sub-section{margin-top:56px;padding-top:56px;border-top:1px solid var(--line)}
+.sub-section:first-of-type{margin-top:0;padding-top:0;border-top:none}
+
+/* media */
+.media-carousel{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.media-carousel::-webkit-scrollbar{height:6px}
+.media-carousel::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.media-carousel img,.media-carousel video{width:min(44%,340px);flex:0 0 auto;scroll-snap-align:start;border:1px solid var(--line)}
+@media (max-width:640px){.media-carousel img,.media-carousel video{width:72%}}
+.swipe-hint{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.media-grid.four{grid-template-columns:repeat(4,1fr)}
+@media (max-width:640px){.media-grid,.media-grid.four{grid-template-columns:1fr 1fr}}
+.media-grid img{width:100%;border:1px solid var(--line)}
+.media-solo{max-width:380px}
+.media-solo img{width:100%;border:1px solid var(--line)}
+.media-wide img{width:100%;border:1px solid var(--line)}
+.media-carousel img,.media-carousel video,.media-grid img,.media-solo img,.media-wide img{opacity:0;transform:translateY(20px)}
+.media-carousel img.inview,.media-carousel video.inview,.media-grid img.inview,.media-solo img.inview,.media-wide img.inview{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
+@media (prefers-reduced-motion:reduce){.media-carousel img,.media-carousel video,.media-grid img,.media-solo img,.media-wide img{opacity:1;transform:none}}
+.sub-h{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:8px;margin:36px 0 16px}
+
+/* placeholder */
+.soon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:760px){.soon-grid{grid-template-columns:1fr}}
+.soon-card{border:1px dashed var(--line);background:var(--panel);padding:22px}
+.soon-card .t{font-weight:800;font-stretch:112%;text-transform:uppercase;font-size:17px}
+.soon-card .m{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
+
+/* big placeholder section */
+.ph-section{border:1px dashed var(--line);background:var(--panel);padding:48px 32px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.ph-section .ph-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+footer{margin-top:110px;border-top:1px solid var(--line);background:var(--panel)}
+.foot-inner{max-width:var(--maxw);margin:0 auto;padding:56px 24px 40px}
+.foot-cta{font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(28px,5vw,54px);line-height:.95;letter-spacing:-.02em}
+.foot-cta a{text-decoration:none;border-bottom:4px solid var(--up)}
+.foot-cta a:hover{color:var(--up)}
+.foot-note{margin-top:36px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+:focus-visible{outline:2px solid var(--up);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.tape-inner,.spark-wrap{animation:none}.spark-wrap{display:none}.hero-load .eyebrow,.hero-load h1,.hero-load .sub,.hero-load .role-row{animation:none;opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav class="main-nav">
+  <a class="nav-mark" href="index.html">Justin Park</a>
+  <a class="back" href="index.html">← All work</a>
+</nav>
+
+<header class="hero-load">
+  <div class="eyebrow"><span class="dot"></span>Growth &amp; Content · 2025–26</div>
+  <h1 id="heroName" aria-label="Kalshi"><span aria-hidden="true"><span class="L">K</span><span class="L">a</span><span class="L">l</span><span class="L">s</span><span class="L">h</span><span class="L">i</span></span> <span class="up">↑</span></h1>
+  <p class="sub">Growth, content, and design for brands people actually follow.</p>
+  <div class="role-row">
+    <span class="chip">▲ Campaigns</span>
+    <span class="chip">▲ Social content</span>
+    <span class="chip">▲ Ad creative</span>
+  </div>
+</header>
+
+<div class="tape" aria-hidden="true"><div class="tape-inner" id="tape"></div></div>
+
+<nav class="sec-nav" aria-label="Jump to section">
+  <div class="sec-nav-inner">
+    <a href="#campaigns">Campaigns</a>
+    <a href="#kalshi-ig">@Kalshi</a>
+    <a href="#kalshi-film">@KalshiFilm</a>
+    <a href="#social-ads">Social Ads</a>
+    <a href="#rebrand">Rebrand</a>
+  </div>
+</nav>
+
+<div class="spark-wrap" aria-hidden="true">
+  <div class="spark-box">
+    <div class="spark-head">
+      <span>JP × KALSHI · Will this content hit the feed?</span>
+      <span class="q">YES <span class="pct" id="sparkPct">96%</span> ▲</span>
+    </div>
+    <svg id="spark" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="sparkfade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#00D08C" stop-opacity=".18"/>
+          <stop offset="100%" stop-color="#00D08C" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <path class="fill" id="sparkFill"></path>
+      <path id="sparkLine"></path>
+      <circle class="spark-dot" id="sparkDot" r="3"></circle>
+    </svg>
+  </div>
+</div>
+
+<!-- ============ CAMPAIGNS ============ -->
+<section id="campaigns">
+  <div class="sec-head"><h2>Campaigns</h2><span class="q">Partnerships &amp; pushes</span></div>
+
+  <!-- Messi -->
+  <div class="sub-section">
+    <div class="sub-h">Messi × Kalshi</div>
+    <p class="sec-desc">Social creative for Kalshi's partnership with Lionel Messi through the 2026 World Cup — news-moment carousels built around live market data, giveaway creative for his signed jersey, and cover explorations for each drop.</p>
+    <div class="sec-links">
+      <a href="https://www.instagram.com/p/DZsZV5jlhh4/" target="_blank" rel="noopener">Top performing ad ↗</a>
+      <a href="https://www.instagram.com/p/DZ5x7BXksHc/" target="_blank" rel="noopener">Top performing ad ↗</a>
+    </div>
+    <p class="swipe-hint">← Hat trick carousel →</p>
+    <div class="media-carousel">
+      <img loading="lazy" src="assets/messi-ht-1.jpg" alt="">
+      <img loading="lazy" src="assets/messi-ht-2.jpg" alt="">
+      <img loading="lazy" src="assets/messi-ht-3.jpg" alt="">
+      <img loading="lazy" src="assets/messi-ht-4.jpg" alt="">
+      <img loading="lazy" src="assets/messi-ht-5.jpg" alt="">
+    </div>
+    <p class="swipe-hint" style="margin-top:20px">← Historic run carousel →</p>
+    <div class="media-carousel">
+      <img loading="lazy" src="assets/messi-wc-cover.jpg" alt="">
+      <video src="assets/messi-wc-video.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <img loading="lazy" src="assets/messi-wc-celebrate.jpg" alt="">
+      <img loading="lazy" src="assets/messi-jersey-post.jpg" alt="">
+      <img loading="lazy" src="assets/messi-wc-chart.jpg" alt="">
+    </div>
+    <div class="media-grid" style="margin-top:20px">
+      <img loading="lazy" src="assets/messi-scorer-cover.jpg" alt="">
+      <img loading="lazy" src="assets/messi-goldenboot-41.jpg" alt="">
+      <img loading="lazy" src="assets/messi-jersey-ad.jpg" alt="">
+    </div>
+    <div class="media-grid" style="margin-top:14px">
+      <img loading="lazy" src="assets/messi-cover-a.jpg" alt="">
+      <img loading="lazy" src="assets/messi-cover-b.jpg" alt="">
+      <img loading="lazy" src="assets/messi-extra.jpg" alt="">
+    </div>
+  </div>
+
+  <!-- Chalamet -->
+  <div class="sub-section">
+    <div class="sub-h">Timothée Chalamet × Kalshi</div>
+    <p class="sec-desc">Two content modes from Kalshi's national ad spot with Timothée Chalamet: clean campaign graphics for the brand's Instagram, and reaction-style social ads built to ride the conversation the commercial started.</p>
+    <div class="sec-links">
+      <a href="https://www.instagram.com/p/DZdQ_wpEg4w/?img_index=1" target="_blank" rel="noopener">Top performing ad ↗</a>
+      <a href="https://www.instagram.com/p/DZdO1t7vFzV/" target="_blank" rel="noopener">The ad ↗</a>
+      <a href="https://www.instagram.com/p/DZdo2nnFki-/" target="_blank" rel="noopener">Top performing ad ↗</a>
+    </div>
+    <div class="media-grid">
+      <img loading="lazy" src="assets/tc-1.jpg" alt="">
+      <img loading="lazy" src="assets/tc-2.jpg" alt="">
+      <img loading="lazy" src="assets/tc-3.jpg" alt="">
+    </div>
+    <div class="media-grid four" style="margin-top:14px">
+      <img loading="lazy" src="assets/tc-ad-1.jpg" alt="">
+      <img loading="lazy" src="assets/tc-ad-2.jpg" alt="">
+      <img loading="lazy" src="assets/tc-ad-3.jpg" alt="">
+      <img loading="lazy" src="assets/tc-ad-4.jpg" alt="">
+    </div>
+  </div>
+
+  <!-- Bryson -->
+  <div class="sub-section">
+    <div class="sub-h">Bryson DeChambeau × Kalshi</div>
+    <p class="sec-desc">Social creative for Kalshi's alien-invaded golf commercial with Bryson DeChambeau — reaction-style graphics and giveaway ads promoting the free year of golf contest attached to the spot.</p>
+    <div class="sec-links">
+      <a href="https://www.instagram.com/p/DWZcTBDjhDC/" target="_blank" rel="noopener">Top performing ad ↗</a>
+    </div>
+    <div class="media-grid">
+      <img loading="lazy" src="assets/bryson-1.jpg" alt="">
+      <img loading="lazy" src="assets/bryson-2.jpg" alt="">
+      <img loading="lazy" src="assets/bryson-3.jpg" alt="">
+    </div>
+  </div>
+
+  <!-- Bond -->
+  <div class="sub-section">
+    <div class="sub-h">Next James Bond</div>
+    <p class="sec-desc">Culture-moment carousel for the Next James Bond market — a black-and-white cover built on the gun-barrel motif, then odds cards for every contender from Callum Turner (48%) down to Idris Elba.</p>
+    <div class="sec-links">
+      <a href="https://www.instagram.com/p/DY2PhwxEe7Y/" target="_blank" rel="noopener">Top performing ad ↗</a>
+    </div>
+    <div class="swipe-hint">← Swipe through the post →</div>
+    <div class="media-carousel">
+      <img loading="lazy" src="assets/bond-cover.jpg" alt="">
+      <img loading="lazy" src="assets/bond-turner.jpg" alt="">
+      <img loading="lazy" src="assets/bond-elordi.jpg" alt="">
+      <img loading="lazy" src="assets/bond-dickinson.jpg" alt="">
+      <img loading="lazy" src="assets/bond-atj.jpg" alt="">
+      <img loading="lazy" src="assets/bond-cavill.jpg" alt="">
+      <img loading="lazy" src="assets/bond-oconnor.jpg" alt="">
+      <img loading="lazy" src="assets/bond-lowden.jpg" alt="">
+      <img loading="lazy" src="assets/bond-james.jpg" alt="">
+      <img loading="lazy" src="assets/bond-holland.jpg" alt="">
+      <img loading="lazy" src="assets/bond-elba.jpg" alt="">
+    </div>
+  </div>
+
+  <!-- Bracket -->
+  <div class="sub-section">
+    <div class="sub-h">$1B March Madness Bracket</div>
+    <p class="sec-desc">Social ads for Kalshi and Jeff Yass's $1 billion perfect bracket giveaway — one of the biggest sports prize pools ever offered, tied to the men's college basketball tournament.</p>
+    <div class="sec-links">
+      <a href="https://www.instagram.com/p/DV_vd7Pj4_m/" target="_blank" rel="noopener">Top performing ad ↗</a>
+      <a href="https://www.instagram.com/p/DV9VIH-EoYk/" target="_blank" rel="noopener">Top performing ad ↗</a>
+    </div>
+    <div class="media-grid">
+      <img loading="lazy" src="assets/bracket-cover.jpg" alt="">
+      <img loading="lazy" src="assets/bracket-detail.jpg" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- ============ @KALSHI ============ -->
+<section id="kalshi-ig">
+  <div class="sec-head"><h2>@Kalshi</h2><span class="q">Daily content · Ongoing</span></div>
+  <p class="sec-desc">News-moment content built around live market data — turning breaking stories into posts that make the market angle the headline.</p>
+
+  <div class="sub-section">
+    <div class="sub-h">Trump at the NBA Finals</div>
+    <p class="sec-desc" style="margin-bottom:16px">The first sitting U.S. president to attend an NBA Finals game, paired with Kalshi's Finals market moving in real time.</p>
+    <div class="swipe-hint">← Swipe through the post →</div>
+    <div class="media-carousel">
+      <video src="assets/trump-v1.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <img loading="lazy" src="assets/trump-cover.jpg" alt="">
+      <video src="assets/trump-v2.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <video src="assets/trump-v3.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <img loading="lazy" src="assets/trump-chart.jpg" alt="">
+    </div>
+  </div>
+
+  <div class="sub-section">
+    <div class="sub-h">World Cup match day slate</div>
+    <div class="swipe-hint">← Swipe through the post →</div>
+    <div class="media-carousel">
+      <img loading="lazy" src="assets/wc2-cover.jpg" alt="">
+      <img loading="lazy" src="assets/wc2-arg-aut.jpg" alt="">
+      <img loading="lazy" src="assets/wc2-fra-irq.jpg" alt="">
+      <img loading="lazy" src="assets/wc2-nor-sen.jpg" alt="">
+      <img loading="lazy" src="assets/wc2-jor-alg.jpg" alt="">
+      <img loading="lazy" src="assets/wc2-trade.jpg" alt="">
+    </div>
+    <div class="sec-links" style="margin-top:16px;margin-bottom:0">
+      <a href="https://www.instagram.com/p/DZ5L2cekdpb/" target="_blank" rel="noopener">Top performing ad ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ @KALSHIFILM ============ -->
+<section id="kalshi-film">
+  <div class="sec-head"><h2>@KalshiFilm</h2><span class="q">Film &amp; culture vertical</span></div>
+  <div class="ph-section">
+    <div class="ph-label">◷ Coming soon — assets in progress</div>
+  </div>
+</section>
+
+<!-- ============ SOCIAL ADS ============ -->
+<section id="social-ads">
+  <div class="sec-head"><h2>Social Ads</h2><span class="q">Ad creative · Ongoing</span></div>
+  <p class="sec-desc">Market-driven ad creative for paid and organic distribution — matchup graphics, clipping campaign banners, and market-data units built to stop the scroll.</p>
+
+  <div class="sub-section">
+    <div class="sub-h">World Cup matchup ads</div>
+    <div class="swipe-hint">← Swipe through →</div>
+    <div class="media-carousel">
+      <img loading="lazy" src="assets/wc-panama-england.jpg" alt="">
+      <img loading="lazy" src="assets/wc-croatia-ghana.jpg" alt="">
+      <img loading="lazy" src="assets/wc-colombia-portugal.jpg" alt="">
+      <img loading="lazy" src="assets/wc-drcongo-uzbekistan.jpg" alt="">
+      <img loading="lazy" src="assets/wc-jordan-argentina.jpg" alt="">
+      <img loading="lazy" src="assets/wc-algeria-austria.jpg" alt="">
+    </div>
+    <div class="sec-links" style="margin-top:16px;margin-bottom:0">
+      <a href="https://www.instagram.com/p/DaFrPxklQQz/" target="_blank" rel="noopener">Top performing ad ↗</a>
+    </div>
+  </div>
+
+  <div class="sub-section">
+    <div class="sub-h">Clipping campaign banners</div>
+    <p class="sec-desc" style="margin-bottom:16px">Banner creative for creator clipping campaigns, translating live Kalshi markets into ad units embedded in viral sports clips.</p>
+    <div class="media-wide">
+      <img loading="lazy" src="assets/ad-cowboys.jpg" alt="">
+    </div>
+  </div>
+</section>
+
+<!-- ============ REBRAND ============ -->
+<section id="rebrand">
+  <div class="sec-head"><h2>Rebrand</h2><span class="q">Before &amp; after</span></div>
+  <div class="ph-section">
+    <div class="ph-label">◷ Coming soon — assets in progress</div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <p class="foot-cta">Want work like this? <a href="mailto:justinpark1209@gmail.com">Get in touch →</a></p>
+    <p class="foot-note">© 2026 Justin Park · <a href="index.html" style="color:inherit">justinpark.work</a></p>
+  </div>
+</footer>
+
+<script>
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ticker */
+const ticks = [
+  ['MESSI \u00d7 KALSHI','LIVE \u25b2'],
+  ['CHALAMET AD ROLLOUT','SHIPPED'],
+  ['BRYSON GOLF SPOT','SHIPPED'],
+  ['NEXT JAMES BOND','TRENDING'],
+  ['$1B BRACKET GIVEAWAY','SHIPPED'],
+  ['WORLD CUP CONTENT','ONGOING'],
+  ['@KALSHIFILM','OPENING SOON'],
+  ['REBRAND SHOWCASE','OPENING SOON']
+];
+const tapeEl = document.getElementById('tape');
+const seq = ticks.map(([k,v])=>`<span>${k} <b>${v}</b></span>`).join('·');
+tapeEl.innerHTML = seq + '·' + seq;
+if(!reduceMotion){
+  const spans = tapeEl.querySelectorAll('span');
+  setInterval(()=>{ const s=spans[Math.floor(Math.random()*spans.length)]; s.classList.add('flash'); setTimeout(()=>s.classList.remove('flash'),700); },2600);
+}
+
+/* sparkline */
+(function(){
+  const svg=document.getElementById('spark');
+  if(!svg||reduceMotion) return;
+  const line=document.getElementById('sparkLine'),fill=document.getElementById('sparkFill'),dot=document.getElementById('sparkDot'),pctEl=document.getElementById('sparkPct');
+  const N=90,H=70;let W=svg.clientWidth||800,pts=[],v=0.55;
+  for(let i=0;i<N;i++){v+=(Math.random()-.46)*.06;v=Math.max(.12,Math.min(.92,v));pts.push(v);}
+  function render(){W=svg.clientWidth||W;const step=W/(N-1);let d='';pts.forEach((p,i)=>{const x=i*step,y=H-p*(H-8)-4;d+=(i?' L':'M')+x.toFixed(1)+' '+y.toFixed(1);});line.setAttribute('d',d);fill.setAttribute('d',d+` L ${W} ${H} L 0 ${H} Z`);dot.setAttribute('cx',(N-1)*step);dot.setAttribute('cy',H-pts[N-1]*(H-8)-4);}
+  render();const len=line.getTotalLength();line.style.strokeDasharray=len;line.style.strokeDashoffset=len;fill.style.opacity=0;
+  requestAnimationFrame(()=>{line.style.transition='stroke-dashoffset 1.6s cubic-bezier(.2,.7,.2,1)';line.style.strokeDashoffset=0;setTimeout(()=>{fill.style.transition='opacity .8s';fill.style.opacity=1;},900);});
+  setInterval(()=>{v+=(Math.random()-.45)*.07;v=Math.max(.12,Math.min(.92,v));pts.push(v);pts.shift();line.style.strokeDasharray='none';render();pctEl.textContent=(92+Math.round(v*7))+'%';},1200);
+  window.addEventListener('resize',render);
+})();
+
+/* hero letters */
+(function(){
+  const fine=window.matchMedia('(hover:hover)').matches;
+  if(!fine||reduceMotion) return;
+  const els=[...document.querySelectorAll('#heroName .L')];if(!els.length) return;
+  const BASE=105,MAX=125,R=260;let cur=els.map(()=>BASE),tgt=els.map(()=>BASE),raf=null;
+  function frame(){let live=false;els.forEach((el,i)=>{cur[i]+=(tgt[i]-cur[i])*.18;if(Math.abs(tgt[i]-cur[i])>.1)live=true;el.style.fontStretch=cur[i].toFixed(1)+'%';});raf=live?requestAnimationFrame(frame):null;}
+  function kick(){if(!raf)raf=requestAnimationFrame(frame);}
+  document.addEventListener('mousemove',e=>{els.forEach((el,i)=>{const r=el.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),d=Math.hypot(dx,dy);tgt[i]=d>R?BASE:BASE+(MAX-BASE)*(1-d/R);});kick();});
+  document.addEventListener('mouseleave',()=>{tgt=tgt.map(()=>BASE);kick();});
+})();
+
+/* sticky nav active state */
+(function(){
+  const links=[...document.querySelectorAll('.sec-nav a')];
+  const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.remove('active'));
+        const active=links.find(l=>l.getAttribute('href')==='#'+e.target.id);
+        if(active){active.classList.add('active');active.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});}
+      }
+    });
+  },{threshold:.15,rootMargin:'-80px 0px -60% 0px'});
+  sections.forEach(s=>io.observe(s));
+})();
+
+/* scroll reveal */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('inview');io.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.media-carousel img,.media-carousel video,.media-grid img,.media-solo img,.media-wide img').forEach(m=>io.observe(m));
+</script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trubel&Co — Justin Park</title>
+<meta name="description" content="Justin Park's work on the Trubel&Co website redesign: product designer on the Impact page, then product manager leading the phase-two redesign.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FAFAF7;--ink:#101112;--muted:#6E6E68;--line:#E4E4DE;--card:#FFFFFF;--maxw:960px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'Archivo',system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:var(--ink);color:var(--paper)}
+a{color:inherit}
+img{display:block;max-width:100%}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-mark{font-weight:900;font-stretch:125%;letter-spacing:-.02em;font-size:18px;text-decoration:none;text-transform:uppercase}
+.back{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--muted)}
+.back:hover{color:var(--ink)}
+
+header{padding:150px 24px 0;max-width:var(--maxw);margin:0 auto}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+h1{font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(52px,11vw,128px);line-height:.9;letter-spacing:-.025em}
+h1 .L{display:inline-block;font-stretch:105%;will-change:font-stretch}
+@media (hover:none),(prefers-reduced-motion:reduce){h1 .L{font-stretch:125%}}
+.hero-sub{margin-top:22px;max-width:600px;font-size:18px;font-weight:500}
+.meta-row{margin-top:26px;display:grid;grid-template-columns:repeat(3,auto);gap:0;width:fit-content;border:1px solid var(--line);background:var(--line)}
+.meta-cell{background:var(--card);padding:14px 20px}
+.meta-cell .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.meta-cell .v{font-weight:800;font-stretch:112%;font-size:15px;margin-top:4px;text-transform:uppercase}
+@media (max-width:600px){.meta-row{grid-template-columns:1fr 1fr}}
+
+main{max-width:var(--maxw);margin:0 auto;padding:80px 24px 0}
+.tl{position:relative;padding-left:28px}
+.tl::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:var(--line)}
+.tl-item{position:relative;margin-bottom:64px;opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
+.tl-item.inview{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.tl-item{opacity:1;transform:none}}
+.tl-dot{position:absolute;left:-34px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--ink);border:2px solid var(--paper)}
+.tl-dot.open{background:var(--paper);border-color:var(--ink)}
+.phase-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tl-item h2{margin-top:8px;font-weight:900;font-stretch:118%;text-transform:uppercase;font-size:clamp(22px,4vw,32px);letter-spacing:-.01em;line-height:1.05}
+.tl-item p{margin-top:12px;font-size:16.5px;max-width:60ch;color:var(--ink)}
+.tl-item p + p{margin-top:10px}
+
+.results{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);margin-top:26px}
+@media (max-width:600px){.results{grid-template-columns:1fr}}
+.result{background:var(--card);padding:20px 18px}
+.result b{display:block;font-weight:900;font-stretch:118%;font-size:clamp(26px,4vw,36px);letter-spacing:-.015em;line-height:1}
+.result span{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block;margin-top:6px}
+
+.ph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+@media (max-width:600px){.ph-grid{grid-template-columns:1fr 1fr}}
+.ph-tile{aspect-ratio:4/5;background:repeating-linear-gradient(-45deg,#F4F4EF,#F4F4EF 10px,#EFEFE9 10px,#EFEFE9 20px);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.ph-tile.wide{aspect-ratio:16/9;grid-column:1/-1}
+.ph-tile span{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center;padding:0 12px}
+.soon-badge{display:inline-block;margin-top:20px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px dashed #C9C9C2;border-radius:999px;padding:6px 12px}
+
+.context{margin-top:26px;border-left:2px solid var(--ink);padding-left:20px}
+.context p{font-size:16.5px;max-width:60ch}
+
+.owned{list-style:none;margin-top:22px;border-top:1px solid var(--ink)}
+.owned li{display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line);font-size:16px}
+.owned li::before{content:'↳';font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);flex-shrink:0}
+
+footer{margin-top:110px;border-top:1px solid var(--ink);background:var(--card)}
+.foot-inner{max-width:var(--maxw);margin:0 auto;padding:48px 24px 36px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.foot-nav{display:flex;gap:20px}
+.foot-nav a{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.foot-nav a:hover{color:var(--ink)}
+.foot-note{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-mark" href="index.html">Justin Park</a>
+  <a class="back" href="index.html">← All work</a>
+</nav>
+
+<header>
+  <div class="eyebrow">Nonprofit website redesign · via Develop for Good · 2024</div>
+  <h1 id="heroName" aria-label="Trubel and Co">
+    <span aria-hidden="true"><span class="L">T</span><span class="L">r</span><span class="L">u</span><span class="L">b</span><span class="L">e</span><span class="L">l</span><span class="L">&</span><span class="L">C</span><span class="L">o</span></span>
+  </h1>
+  <p class="hero-sub">A civic-tech nonprofit equipping youth and communities to fight injustice with data — and a website that wasn't doing the mission justice.</p>
+  <div class="meta-row">
+    <div class="meta-cell"><div class="k">My roles</div><div class="v">Designer → PM</div></div>
+    <div class="meta-cell"><div class="k">Duration</div><div class="v">2 phases · 4+ months</div></div>
+    <div class="meta-cell"><div class="k">Team</div><div class="v">7 people</div></div>
+  </div>
+</header>
+
+<main>
+
+  <section style="padding-top:64px">
+    <div class="context">
+      <p>Trubel&Co runs civic-tech education programs for youth and nonprofits across the US — teaching geospatial tools, data storytelling, and AI to communities fighting environmental and social injustice. With 850+ workshop participants and 6,000+ students impacted, the mission is real. The website wasn't keeping up.</p>
+      <p style="margin-top:10px">I came in through Develop for Good, a program that places college students on pro-bono tech projects for nonprofits.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:72px">
+    <div class="tl">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="phase-label">Phase 01 · Product Designer</div>
+        <h2>Owning the Impact page</h2>
+        <p>As one of seven designers on a four-month redesign, I owned the Impact page end to end — from initial wireframes through rounds of usability testing to final implementation in Squarespace.</p>
+        <p>The team restructured the site's information architecture and built an accessible design system. My deliverable: a page that made Trubel&Co's impact legible and compelling to donors, partners, and potential participants.</p>
+
+        <div class="context" style="margin-top:20px">
+          <p><strong>What I owned:</strong></p>
+        </div>
+        <ul class="owned">
+          <li>Impact page IA and wireframes — first draft through final</li>
+          <li>Component design for impact stats and program cards</li>
+          <li>Usability testing sessions and synthesizing findings</li>
+          <li>Squarespace implementation and QA</li>
+        </ul>
+
+        <div class="results">
+          <div class="result"><b>2.25 min</b><span>Faster to key info post-redesign</span></div>
+          <div class="result"><b>+8%</b><span>Key action completion rate</span></div>
+          <div class="result"><b>+20%</b><span>Ease of finding information</span></div>
+        </div>
+
+        <div class="ph-grid" style="margin-top:28px">
+          <div class="ph-tile wide"><span>Before — original Impact page</span></div>
+          <div class="ph-tile"><span>Wireframes</span></div>
+          <div class="ph-tile"><span>Design iteration</span></div>
+          <div class="ph-tile"><span>Final — Impact page</span></div>
+        </div>
+        <span class="soon-badge">◷ Design artifacts coming soon</span>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot open"></div>
+        <div class="phase-label">Phase 02 · Product Manager</div>
+        <h2>Leading the redesign</h2>
+        <p>In the second phase I stepped into the PM role — leading the full site redesign rather than executing within it. That meant owning scope, coordinating a cross-functional team, prioritizing decisions, and driving to launch.</p>
+        <p>The designer-to-PM arc within one project is the story here: having designed a page in phase one gave me grounded context that made me a better PM in phase two — I knew exactly where the design decisions lived and how to unblock the team.</p>
+
+        <ul class="owned" style="margin-top:20px">
+          <li>Defined project scope and success metrics</li>
+          <li>Ran weekly team standups and design reviews</li>
+          <li>Stakeholder communication with Trubel&Co leadership</li>
+          <li>Final launch sign-off and handoff</li>
+        </ul>
+
+        <div class="ph-grid" style="margin-top:28px">
+          <div class="ph-tile"><span>Project brief</span></div>
+          <div class="ph-tile"><span>Team process</span></div>
+          <div class="ph-tile"><span>Final site</span></div>
+        </div>
+        <span class="soon-badge">◷ Full writeup coming soon</span>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="phase-label">Outcome · Live</div>
+        <h2>The site is up</h2>
+        <p>The redesigned Trubel&Co website is live at <a href="https://trubel.co" target="_blank" rel="noopener" style="border-bottom:1px solid var(--ink)">trubel.co</a> — serving youth programs, nonprofit partners, and donors across the US.</p>
+        <div class="context" style="margin-top:18px">
+          <p>Trubel&Co runs Mapping Justice, GIS workshops, and data storytelling programs for 6,000+ students, teachers, and practitioners. The site had to speak to all of them.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <p class="foot-note">© 2026 Justin Park</p>
+    <div class="foot-nav">
+      <a href="index.html">All work</a>
+      <a href="kalshi.html">Kalshi →</a>
+      <a href="mailto:justinpark1209@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const fine = window.matchMedia('(hover:hover)').matches;
+  const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!fine || rm) return;
+  const els = [...document.querySelectorAll('#heroName .L')];
+  if(!els.length) return;
+  const BASE=105, MAX=125, R=280;
+  let cur=els.map(()=>BASE), tgt=els.map(()=>BASE), raf=null;
+  function frame(){
+    let live=false;
+    els.forEach((el,i)=>{ cur[i]+=(tgt[i]-cur[i])*.18; if(Math.abs(tgt[i]-cur[i])>.1) live=true; el.style.fontStretch=cur[i].toFixed(1)+'%'; });
+    raf=live?requestAnimationFrame(frame):null;
+  }
+  function kick(){ if(!raf) raf=requestAnimationFrame(frame); }
+  document.addEventListener('mousemove',e=>{ els.forEach((el,i)=>{ const r=el.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),d=Math.hypot(dx,dy); tgt[i]=d>R?BASE:BASE+(MAX-BASE)*(1-d/R); }); kick(); });
+  document.addEventListener('mouseleave',()=>{ tgt=tgt.map(()=>BASE); kick(); });
+})();
+
+const io = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('inview');io.unobserve(e.target);}});},{threshold:.1});
+document.querySelectorAll('.tl-item').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
