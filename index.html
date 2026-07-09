@@ -30,6 +30,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:cent
 header{padding:160px 24px 0;max-width:var(--maxw);margin:0 auto}
 .hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
 h1{font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(52px,11vw,148px);line-height:.92;letter-spacing:-.025em}
+h1 .L{display:inline-block;font-stretch:105%;will-change:font-stretch}
+@media (hover:none),(prefers-reduced-motion:reduce){h1 .L{font-stretch:125%}}
 .hero-sub{margin-top:26px;max-width:580px;font-size:19px;font-weight:500}
 .hero-sub em{font-style:normal;border-bottom:2px solid var(--ink)}
 .hero-load h1,.hero-load .hero-sub,.hero-load .hero-eyebrow{opacity:0;transform:translateY(18px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
@@ -112,7 +114,7 @@ footer{margin-top:110px;border-top:1px solid var(--ink);background:var(--card)}
 
 <header id="top" class="hero-load">
   <div class="hero-eyebrow">Los Angeles / Boston · Open to growth &amp; design roles</div>
-  <h1>Justin<br>Park</h1>
+  <h1 id="heroName" aria-label="Justin Park"><span aria-hidden="true"><span class="L">J</span><span class="L">u</span><span class="L">s</span><span class="L">t</span><span class="L">i</span><span class="L">n</span><br><span class="L">P</span><span class="L">a</span><span class="L">r</span><span class="L">k</span></span></h1>
   <p class="hero-sub">Growth, content, and design for brands people actually follow — from <em>fintech campaigns</em> seen by millions to nonprofit products that ship.</p>
 </header>
 
@@ -206,6 +208,31 @@ document.querySelectorAll('.feature,.pair-card').forEach(c=>io.observe(c));
     tlift=1; card.classList.add('tilting'); kick();
   });
   card.addEventListener('mouseleave',()=>{ tx=0; ty=0; tlift=0; kick(); });
+})();
+
+/* hero letters: grow toward the cursor */
+(function(){
+  const fine = window.matchMedia('(hover:hover)').matches;
+  const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!fine || rm) return;
+  const els = [...document.querySelectorAll('#heroName .L')];
+  if(!els.length) return;
+  const BASE=105, MAX=125, R=260;
+  let cur = els.map(()=>BASE), tgt = els.map(()=>BASE), raf=null;
+  function frame(){
+    let live=false;
+    els.forEach((el,i)=>{ cur[i]+=(tgt[i]-cur[i])*.18; if(Math.abs(tgt[i]-cur[i])>.1) live=true; el.style.fontStretch=cur[i].toFixed(1)+'%'; });
+    raf = live ? requestAnimationFrame(frame) : null;
+  }
+  function kick(){ if(!raf) raf=requestAnimationFrame(frame); }
+  document.addEventListener('mousemove',e=>{
+    els.forEach((el,i)=>{
+      const r=el.getBoundingClientRect(), dx=e.clientX-(r.left+r.width/2), dy=e.clientY-(r.top+r.height/2), d=Math.hypot(dx,dy);
+      tgt[i] = d>R ? BASE : BASE+(MAX-BASE)*(1-d/R);
+    });
+    kick();
+  });
+  document.addEventListener('mouseleave',()=>{ tgt=tgt.map(()=>BASE); kick(); });
 })();
 </script>
 </body>
